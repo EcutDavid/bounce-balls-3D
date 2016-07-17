@@ -6,26 +6,34 @@ export default class Canvas{
 
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer();
-    this.renderer.setClearColor('#eee')
+    this.renderer.setClearColor('skyblue');
     this.renderer.setSize(innerWidth, innerHeight);
 
-    this.scene.add(new THREE.AxisHelper(500));
-    setInterval(this.updateAttributes, 500);
+    this.updateCamera();
+
+    document.body.appendChild(this.renderer.domElement);
+    setInterval(() => this.updateAttributes(), 500);
+  }
+
+  updateCamera() {
+    const { innerHeight, innerWidth } = window;
 
     this.camera =  new THREE.PerspectiveCamera(75,
       innerWidth / innerHeight, 1, 10000);
-    this.camera.position.z = 700;
+    this.camera.position.z = 900;
     this.camera.position.y = 500;
     this.camera.position.x = 500;
-    this.camera.lookAt(this.scene.position)
-
-    document.body.appendChild(this.renderer.domElement);
+    this.camera.lookAt(this.scene.position);
   }
 
   updateAttributes() {
     const { innerHeight, innerWidth } = window;
-
+    if (this.width === innerWidth && this.height === innerHeight) {
+      return;
+    }
+    this.width = innerWidth;
+    this.height = innerHeight;
     this.renderer.setSize(innerWidth, innerHeight);
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
+    this.updateCamera();
   }
 }
