@@ -11,6 +11,9 @@ export default class GameController {
       z: 9.8
     };
 
+    this.borderHeight = innerHeight / 2
+    this.borderWidth = initialWidth / 2
+
     this.radiusArr = [];
     for (var i = 0; i < count; i++) {
       this.radiusArr.push(Math.random() * 27 + 6);
@@ -21,9 +24,9 @@ export default class GameController {
     let yOffsetCounter = 0;
     for (let i = 0; i < count; i++) {
       xOffsetCounter += 50 * (i % 6) + Math.random() * 17;
-      xOffsetCounter %= initialWidth;
+      xOffsetCounter %= (initialWidth - 70);
       yOffsetCounter = Number.parseInt(i / 6) * 70 + Math.random() * 27;
-      yOffsetCounter %= initialWidth;
+      yOffsetCounter %= (initialWidth - 70);
       this.positions.push({
         x: -initialWidth / 2 + xOffsetCounter,
         y: -initialWidth / 2 + yOffsetCounter,
@@ -39,6 +42,9 @@ export default class GameController {
         y: 0,
         z: 0
       });
+
+      this.onInit = true;
+      setTimeout(() => this.onInit = false, 2000)
     }
 
     // TODO: Change naturalForce basedon user device's state.
@@ -50,4 +56,57 @@ export default class GameController {
     // })
   }
 
+  update(fps = 60) {
+    // Pass the very first few seconds
+    // Application is not stable during that time
+    if (this.onInit) {
+      return;
+    }
+    const { borderHeight, borderWidth } = this;
+
+    this.positions = this.positions.map((d, i) => {
+      //handle force
+      const accX = this.defaultAcc[i].x + this.naturalForce.x;
+      const accY = this.defaultAcc[i].y + this.naturalForce.y;
+      const accZ = this.defaultAcc[i].z + this.naturalForce.z;
+
+      const time = 1 / fps;
+      this.speed[i].x += accX * 50 * time;
+      this.speed[i].y += accY * 50 * time;
+      this.speed[i].z += accZ * 50 * time;
+
+      d.x += time * this.speed[i].x;
+      d.y += time * this.speed[i].y;
+      d.z += time * this.speed[i].z;
+
+      //handle ball collide borders
+      const radius = this.radiusArr[i]
+      if (d.x < -borderWidth + radius) {
+        d.x = -borderWidth + radius;
+        this.speed[i].x *= -1;
+      }
+      if (d.x > borderWidth - radius) {
+        d.x = borderWidth - radius;
+        this.speed[i].x *= -1;
+      }
+      if (d.y > borderWidth - radius) {
+        d.y = borderWidth - radius;
+        this.speed[i].y *= -1;
+      }
+      if (d.y < -borderWidth + radius) {
+        d.y = -borderWidth + radius;
+        this.speed[i].y *= -1;
+      }
+      if (d.z > borderHeight - radius) {
+        d.z = borderHeight - radius;
+        this.speed[i].z *= -1;
+      }
+      if (d.z < -borderHeight + radius) {
+        d.z = -borderHeight + radius;
+        this.speed[i].z *= -1;
+      }
+
+      return d;
+    });
+  }
 }

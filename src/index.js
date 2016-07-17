@@ -15,8 +15,9 @@ const ballsController = new BallsController(BALLS_COUNT,
 const { renderer, scene } = canvas;
 
 const { radiusArr, positions } = ballsController
+const balls = []
 for (let i = 0; i < BALLS_COUNT; i++) {
-  new Ball(scene, radiusArr[i], positions[i])
+  balls.push(new Ball(scene, radiusArr[i], positions[i]));
 }
 
 new Cube(scene);
@@ -25,6 +26,11 @@ function animate() {
   const { camera } = canvas;
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
+
+  ballsController.update();
+  ballsController.positions.forEach((d, i) => {
+    balls[i].update(d);
+  })
 }
 
 animate();
