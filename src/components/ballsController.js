@@ -11,8 +11,8 @@ export default class GameController {
       z: 9.8
     };
 
-    this.borderHeight = innerHeight / 2
-    this.borderWidth = initialWidth / 2
+    this.zMaxLength = innerHeight / 2;
+    this.xyMaxLength = initialWidth / 2;
 
     this.radiusArr = [];
     for (var i = 0; i < count; i++) {
@@ -62,7 +62,7 @@ export default class GameController {
     if (this.onInit) {
       return;
     }
-    const { borderHeight, borderWidth } = this;
+    const { zMaxLength, xyMaxLength } = this;
 
     this.positions = this.positions.map((d, i) => {
       //handle force
@@ -81,28 +81,28 @@ export default class GameController {
 
       //handle ball collide borders
       const radius = this.radiusArr[i]
-      if (d.x < -borderWidth + radius) {
-        d.x = -borderWidth + radius;
+      if (d.x < -xyMaxLength + radius) {
+        d.x = -xyMaxLength + radius;
         this.speed[i].x *= -1;
       }
-      if (d.x > borderWidth - radius) {
-        d.x = borderWidth - radius;
+      if (d.x > xyMaxLength - radius) {
+        d.x = xyMaxLength - radius;
         this.speed[i].x *= -1;
       }
-      if (d.y > borderWidth - radius) {
-        d.y = borderWidth - radius;
+      if (d.y > xyMaxLength - radius) {
+        d.y = xyMaxLength - radius;
         this.speed[i].y *= -1;
       }
-      if (d.y < -borderWidth + radius) {
-        d.y = -borderWidth + radius;
+      if (d.y < -xyMaxLength + radius) {
+        d.y = -xyMaxLength + radius;
         this.speed[i].y *= -1;
       }
-      if (d.z > borderHeight - radius) {
-        d.z = borderHeight - radius;
+      if (d.z > zMaxLength - radius) {
+        d.z = zMaxLength - radius;
         this.speed[i].z *= -1;
       }
-      if (d.z < -borderHeight + radius) {
-        d.z = -borderHeight + radius;
+      if (d.z < -zMaxLength + radius) {
+        d.z = -zMaxLength + radius;
         this.speed[i].z *= -1;
       }
 

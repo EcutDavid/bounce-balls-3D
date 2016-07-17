@@ -8,14 +8,15 @@ import BallsController from './components/ballsController';
 const BALLS_COUNT = 80;
 
 const canvas = new Canvas();
-const { innerHeight: initialHeight, innerWidth: initialWidth } = window;
+const { innerWidth: initialWidth, innerHeight: initialHeight } = window;
 
 const ballsController = new BallsController(BALLS_COUNT,
   initialWidth, initialHeight);
+
 const { renderer, scene, camera } = canvas;
 
-const { radiusArr, positions } = ballsController
-const balls = []
+const { radiusArr, positions } = ballsController;
+const balls = [];
 for (let i = 0; i < BALLS_COUNT; i++) {
   balls.push(new Ball(scene, radiusArr[i], positions[i]));
 }
@@ -23,11 +24,11 @@ for (let i = 0; i < BALLS_COUNT; i++) {
 new Cube(scene);
 
 
-let counter = 0
+let counter = 0;
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
-  camera.rotation.z = counter++ * Math.PI / 360
+  camera.rotation.z = counter++ / 150;
 
   ballsController.update();
   ballsController.positions.forEach((d, i) => {

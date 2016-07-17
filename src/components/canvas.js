@@ -1,10 +1,11 @@
-import THREE from 'three'
+import THREE from 'three';
 
 export default class Canvas{
   constructor() {
     const { innerHeight, innerWidth } = window;
 
     this.scene = new THREE.Scene();
+    // There are some other renderer provided by three, such as canvas renderer
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setClearColor('skyblue');
     this.renderer.setSize(innerWidth, innerHeight);
@@ -28,6 +29,7 @@ export default class Canvas{
 
   updateAttributes() {
     const { innerHeight, innerWidth } = window;
+    //Only make change when browser resized
     if (this.width === innerWidth && this.height === innerHeight) {
       return;
     }

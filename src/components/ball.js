@@ -1,5 +1,4 @@
 import THREE from 'three';
-// import { generateRandomColor } from '../helpers/color';
 
 export default class Ball {
   constructor(scene, radius = 40, pos = { x: 500, y: 0, z: 10 }) {
