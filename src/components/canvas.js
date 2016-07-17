@@ -21,8 +21,8 @@ export default class Canvas{
     this.camera =  new THREE.PerspectiveCamera(75,
       innerWidth / innerHeight, 1, 10000);
     this.camera.position.z = 900;
-    this.camera.position.y = 500;
-    this.camera.position.x = 500;
+    this.camera.position.y = 900;
+    this.camera.position.x = 900;
     this.camera.lookAt(this.scene.position);
   }
 
