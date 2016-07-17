@@ -18,11 +18,11 @@ export default class Canvas{
   updateCamera() {
     const { innerHeight, innerWidth } = window;
 
-    this.camera =  new THREE.PerspectiveCamera(75,
+    this.camera =  new THREE.PerspectiveCamera(85,
       innerWidth / innerHeight, 1, 10000);
-    this.camera.position.z = 900;
-    this.camera.position.y = 900;
-    this.camera.position.x = 900;
+    this.camera.position.z = 1000;
+    this.camera.position.y = 1000;
+    this.camera.position.x = 1000;
     this.camera.lookAt(this.scene.position);
   }
 
