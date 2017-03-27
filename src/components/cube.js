@@ -5,8 +5,8 @@ export default class Cube {
     const { innerHeight: height, innerWidth: width } = window;
     const geometry = new THREE.BoxGeometry(width, width, height, 0, 0, 0);
     const material = new THREE.MeshBasicMaterial({
-      color: '#eee',
-      opacity: 0.2,
+      color: '#e5e5e5',
+      opacity: 0.3,
       transparent: true
     });
 

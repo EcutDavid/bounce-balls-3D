@@ -16,7 +16,7 @@ export default class GameController {
 
     this.radiusArr = [];
     for (var i = 0; i < count; i++) {
-      this.radiusArr.push(Math.random() * 27 + 6);
+      this.radiusArr.push(Math.random() * 27 * innerHeight / 1000 + 6);
     }
 
     // Setup balls

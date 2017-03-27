@@ -11,19 +11,19 @@ export default class Canvas{
     this.renderer.setSize(innerWidth, innerHeight);
 
     this.updateCamera();
-
+    document.body.querySelector('.loading').remove();
     document.body.appendChild(this.renderer.domElement);
-    setInterval(() => this.updateAttributes(), 500);
+    setInterval(() => this.updateAttributes(), 100);
   }
 
   updateCamera() {
     const { innerHeight, innerWidth } = window;
 
-    this.camera =  new THREE.PerspectiveCamera(85,
+    this.camera =  new THREE.PerspectiveCamera(55,
       innerWidth / innerHeight, 1, 10000);
-    this.camera.position.z = 1000;
-    this.camera.position.y = 1000;
-    this.camera.position.x = 1000;
+    this.camera.position.z = innerWidth;
+    this.camera.position.y = innerWidth;
+    this.camera.position.x = innerWidth;
     this.camera.lookAt(this.scene.position);
   }
 

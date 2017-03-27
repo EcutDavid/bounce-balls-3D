@@ -8,7 +8,8 @@
     "dist": "webpack --env=dist",
     "lint": "eslint ./src",
     "dev": "webpack --env=dev --watch",
-    "watchDev": "cd dist && browser-sync start --server --files \"*.*\""
+    "watchDev": "cd dist && browser-sync start --server --files \"*.*\"",
+    "deploy": "npm run dist && gh-pages -d dist"
   },
   "repository": "",
   "keywords": [],
@@ -40,6 +41,7 @@
     "webpack-dev-server": "^1.12.0"
   },
   "dependencies": {
+    "gh-pages": "^0.12.0",
     "three": "^0.79.0"
   }
 }
