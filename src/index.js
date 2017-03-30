@@ -6,7 +6,7 @@ import Cube from './components/cube';
 import BallsController from './components/ballsController';
 
 const BALLS_COUNT = 50;
-const FRAME_COUNTPER_BALl = 10;
+const FRAME_COUNTPER_BALl = 150;
 
 
 const init = () => {
@@ -52,7 +52,6 @@ const init = () => {
   setTimeout(function () {
     lastStep();
   }, 0);
-
 };
 
 setTimeout(function () {
